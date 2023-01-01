@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>netcoreapp3.1;net6.0;net7.0</TargetFrameworks>
     <Title>NyaaWrapper</Title>
     <Authors>Jirubizu</Authors>
     <Description>A wrapper for nyaa.si</Description>
@@ -13,6 +13,8 @@
     <PackageProjectUrl>https://github.com/Jirubizu/NyaaWrapper</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Jirubizu/NyaaWrapper</RepositoryUrl>
     <PackageTags>Wrapper, Anime, Nyaa, Nyaa.si</PackageTags>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
 
   <ItemGroup>
