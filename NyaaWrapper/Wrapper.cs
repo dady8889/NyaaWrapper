@@ -41,25 +41,42 @@ namespace NyaaWrapper
 
             foreach (IElement row in rows)
             {
+                int dataCellCounter = 0;
                 var block = new List<string>();
+
                 foreach (IElement td in row.Children.Where(m => m.LocalName == "td"))
                 {
-                    if (td.Children.Count(m => m.LocalName == "a") != 0)
+                    // the cell with name can also contain comments.
+                    if (dataCellCounter == 1)
                     {
-                        foreach (IElement link in td.Children.Where(m => m.LocalName == "a"))
+                        // select only title without comments.
+                        var titleLink = td.Children.Where(m => m.LocalName == "a" && !m.GetAttribute("href").Contains("comments")).FirstOrDefault();
+                        if (titleLink != null)
                         {
-                            if (!link.GetAttribute("href").Contains("#comments"))
+                            block.Add(titleLink.GetAttribute("href"));
+                            block.Add(titleLink.TextContent.Replace("\t", "").Replace("\n", ""));
+                        }
+                    }
+                    else // other data cells
+                    {
+                        // can contain download/torrent links
+                        if (td.Children.Count(m => m.LocalName == "a") != 0)
+                        {
+                            foreach (IElement link in td.Children.Where(m => m.LocalName == "a"))
                             {
                                 block.Add(link.GetAttribute("href"));
                             }
                         }
+
+                        // or plain text
+                        string temp = td.TextContent.Replace("\t", "").Replace("\n", "");
+                        if (temp != "")
+                        {
+                            block.Add(temp);
+                        }
                     }
 
-                    string temp = td.TextContent.Replace("\t", "").Replace("\n", "");
-                    if (temp != "")
-                    {
-                        block.Add(temp);
-                    }
+                    dataCellCounter++;
                 }
 
                 torrents.Add(new NyaaTorrentStruct
