@@ -36,8 +36,10 @@ namespace NyaaWrapper
             IDocument document = await BrowsingContext.New(config)
                 .OpenAsync($"{url}/?f={options.Filter.GetUri()}&c={options.Category.GetUri()}&q={options.Search}");
             List<NyaaTorrentStruct> torrents = new List<NyaaTorrentStruct>();
-            IEnumerable<IElement> rows = document.QuerySelectorAll("tbody tr")
-                .Take(options.Amount != 0 ? options.Amount : 15);
+            IEnumerable<IElement> rows = document.QuerySelectorAll("tbody tr");
+
+            if (options.Amount != 0)
+                rows = rows.Take(options.Amount);
 
             foreach (IElement row in rows)
             {
