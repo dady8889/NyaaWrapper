@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <Title>NyaaWrapper</Title>
     <Authors>Jirubizu</Authors>
     <Description>A wrapper for nyaa.si</Description>
@@ -15,10 +15,11 @@
     <PackageTags>Wrapper, Anime, Nyaa, Nyaa.si</PackageTags>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+	<Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleSharp" Version="1.0.0-alpha-827" />
+    <PackageReference Include="AngleSharp" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
